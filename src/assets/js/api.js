@@ -37,11 +37,20 @@ const api = {
 
   exec (params) {
     return Vue.http.get(this.url, {params: params})
-      .then(this.checkHTTP)
-      .then(this.parseJson)
-      .then(this.checkStatus)
+    .then(this.checkHTTP)
+    .then(this.parseJson)
+    .then(this.checkStatus)
   },
-  query (params) {
+  query (queryString, page) {
+    const params = {}
+    if (queryString) {
+      params.q = queryString
+    }
+    if (page) {
+      params.page = page
+    }
+    console.log(params)
+
     return this.exec(params)
     .then((json) => {
       if (!json) {
