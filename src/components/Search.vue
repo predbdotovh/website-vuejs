@@ -13,10 +13,20 @@
     <table class="table table-sm table-striped table-hover" v-if="releases.length">
       <tbody>
         <tr v-for="r in releases">
-          <td><router-link :to="{name: 'search', query: {q: '@cat ' + r.cat}}">{{r.cat}}</router-link> {{r.genre}}</td>
-          <td>{{r.name.replace('-' + r.team, '')}}<router-link :to="{name: 'search', query: {q: '@team ' + r.team}}">-{{r.team}}</router-link></td>
-          <td>{{r.preAt}}</td>
-          <td>{{r.files}} {{r.size}}</td>
+          <td>
+            <router-link class="block" :to="{name: 'search', query: {q: '@cat ' + r.cat}}">{{r.cat}}</router-link>
+            <span class="block text-break" v-if="r.genre">{{r.genre}}</span>
+          </td>
+          <td>
+            <span class="text-break">{{r.name.replace('-' + r.team, '')}}<router-link class="text-italic" :to="{name: 'search', query: {q: '@team ' + r.team}}">-{{r.team}}</router-link></span>
+          </td>
+          <td>
+            <span v-if="r.preAt">{{new Date(r.preAt * 1000).toLocaleString()}}</span>
+          </td>
+          <td>
+            <span class="block" v-if="r.files">{{r.files}}F</span>
+            <span class="block" v-if="r.size">{{Math.round(r.size * 100) / 100}}MB</span>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -100,7 +110,7 @@ export default {
 
 <style>
 .search {
-  margin: 0 20px;
+  margin: 0 12px;
 }
 .input-group-addon .form-switch {
   padding-top: 0;
@@ -110,6 +120,6 @@ export default {
   top: .1rem;
 }
 .table-sm tbody td {
-  padding: .8rem 1rem;
+  padding: .4rem 1rem;
 }
 </style>
