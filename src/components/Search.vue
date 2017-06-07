@@ -46,6 +46,8 @@ export default {
   },
   methods: {
     run () {
+      this.page.current = 1
+      this.q = ''
       this.parseURLQuery(this.$route)
       this.search()
     },
@@ -60,8 +62,7 @@ export default {
     },
     generateURLQuery () {
       return {
-        q: this.q,
-        page: this.page.current
+        q: this.q
       }
     },
     search () {
