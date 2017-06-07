@@ -166,10 +166,4 @@ export default {
 .state-loading {
   opacity: 0.6;
 }
-.files {
-  color: #32b643;
-}
-.size {
-  color: #ffb700;
-}
 </style>
