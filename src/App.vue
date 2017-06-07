@@ -3,6 +3,7 @@
     <header class="navbar">
       <section class="navbar-section">
         <router-link class="btn btn-link navbar-brand" :to="{name: 'search'}">PREdb</router-link>
+        <router-link class="btn btn-link" :to="{name: 'live'}">Live</router-link>
         <router-link class="btn btn-link"  :to="{name: 'stats'}">Stats</router-link>
         <a class="btn btn-link"  href="https://predbdotovh.github.io/pre-api/">API</a>
         <a class="btn btn-link"  href="https://telegram.me/predbbot">Telegram Bot</a>

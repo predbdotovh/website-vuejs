@@ -39,6 +39,19 @@ const api = {
     .then(this.parseJson)
     .then(this.checkStatus)
   },
+  websocket () {
+    return new WebSocket(this.wss)
+  },
+  fresh () {
+    return this.exec('live', {})
+    .then((json) => {
+      if (!json) {
+        return
+      }
+
+      return json.data
+    })
+  },
   query (queryString, page) {
     const params = {}
     if (queryString) {
