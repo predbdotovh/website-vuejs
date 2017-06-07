@@ -55,7 +55,7 @@ export default {
   },
   watch: {
     'state': function (s) {
-      if (s === 'Loading') {
+      if (s) {
         this.start()
       } else {
         this.done()

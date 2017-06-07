@@ -4,8 +4,6 @@ const host = 'predb.ovh'
 const endpoint = host + '/api/v1'
 
 const api = {
-  host: 'predb.ovh',
-  endpoint: '/api/v1',
   url: 'https://' + endpoint + '/',
   wss: 'wss://' + endpoint + '/ws',
 
@@ -35,8 +33,8 @@ const api = {
     return json
   },
 
-  exec (params) {
-    return Vue.http.get(this.url, {params: params})
+  exec (path, params) {
+    return Vue.http.get(this.url + path, {params: params})
     .then(this.checkHTTP)
     .then(this.parseJson)
     .then(this.checkStatus)
@@ -46,12 +44,11 @@ const api = {
     if (queryString) {
       params.q = queryString
     }
-    if (page) {
+    if (page && page !== 1) {
       params.page = page
     }
-    console.log(params)
 
-    return this.exec(params)
+    return this.exec('', params)
     .then((json) => {
       if (!json) {
         return

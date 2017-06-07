@@ -6,48 +6,41 @@
         <button class="btn btn-primary input-group-btn" @click.prevent="go">Go</button>
       </form>
     </div>
-    <LoadingBar :state="status"></LoadingBar>
+    <LoadingBar :state="loading"></LoadingBar>
     <div class="status">
       {{status}}
     </div>
-    <table class="table table-sm table-striped table-hover" v-if="releases.length">
+    <table class="table table-sm table-striped table-hover" :class="{'state-loading': loading}" v-if="releases.length">
       <tbody>
-        <tr v-for="r in releases">
-          <td>
-            <router-link class="block" :to="{name: 'search', query: {q: '@cat ' + r.cat}}">{{r.cat}}</router-link>
-            <span class="block text-break" v-if="r.genre">{{r.genre}}</span>
-          </td>
-          <td>
-            <span class="text-break">{{r.name.replace('-' + r.team, '')}}<router-link class="text-italic" :to="{name: 'search', query: {q: '@team ' + r.team}}">-{{r.team}}</router-link></span>
-          </td>
-          <td>
-            <span v-if="r.preAt">{{new Date(r.preAt * 1000).toLocaleString()}}</span>
-          </td>
-          <td>
-            <span class="block" v-if="r.files">{{r.files}}F</span>
-            <span class="block" v-if="r.size">{{Math.round(r.size * 100) / 100}}MB</span>
-          </td>
-        </tr>
+        <TableRow v-for="row in releases" :r="row" :key="row.id"></TableRow>
       </tbody>
     </table>
-    <ul class="pagination">
-    </ul>
+    <Pagination :page="page"></Pagination>
   </div>
 </template>
 
 <script>
 import api from '@/assets/js/api'
 import LoadingBar from './LoadingBar'
+import Pagination from './Pagination'
+import TableRow from './TableRow'
 
 export default {
   name: 'search',
   components: {
-    LoadingBar
+    TableRow,
+    LoadingBar,
+    Pagination
   },
   data () {
     return {
+      loading: false,
       status: 'Loading',
       q: '',
+      page: {
+        current: 1,
+        max: 0
+      },
       releases: []
     }
   },
@@ -61,32 +54,80 @@ export default {
     },
     parseURLQuery (route) {
       this.q = route.query.q
+      if (route.query.page) {
+        this.page.current = route.query.page
+      }
     },
     generateURLQuery () {
       return {
-        q: this.q
+        q: this.q,
+        page: this.page.current
       }
     },
     search () {
+      this.loading = true
       this.status = 'Loading'
       if (this.q) {
         this.setPageTitle('Search ' + this.q)
       }
-      let elStart = window.performance.now()
-      api.query(this.q, this.page)
+      window.scrollTo(0, 0)
+      const elStart = window.performance.now()
+      api.query(this.q, this.page.current)
+      .then(this.calcPages)
       .then((data) => {
         if (!data) {
           return
         }
 
-        let elSeconds = Math.round(window.performance.now() - elStart) / 1000
+        const elSeconds = Math.round(window.performance.now() - elStart) / 1000
         this.status = 'Results ' + (data.offset + 1) + '-' + (data.offset + data.rowCount) +
           ' of ' + data.total + ' matches in ' + elSeconds + ' seconds'
         this.releases = data.rows
       })
       .catch((err) => {
-        this.status = err.message
+        this.status = err.message || 'Error while loading releases'
       })
+      .finally(() => {
+        this.loading = false
+      })
+    },
+    calcPages (data) {
+      if (!data) {
+        return
+      }
+
+      this.page = {
+        current: Math.floor(data.offset / data.reqCount) + 1,
+        max: Math.ceil(data.total / data.reqCount),
+        list: []
+      }
+
+      {
+        let q = Object.assign({}, this.$route.query)
+        q.page = this.page.current - 1
+        this.page.list.push({text: '<<', i: q.page, link: {path: this.$route.path, query: q}})
+      }
+      let min = this.page.current - 4
+      let max = this.page.current + 4
+      for (let i = min; i <= max; i++) {
+        if (i < 1) {
+          max++
+          continue
+        }
+        if (i > this.page.max) {
+          break
+        }
+        let q = Object.assign({}, this.$route.query)
+        q.page = i
+        this.page.list.push({text: q.page, i: q.page, link: {path: this.$route.path, query: q}})
+      }
+      {
+        let q = Object.assign({}, this.$route.query)
+        q.page = this.page.current + 1
+        this.page.list.push({text: '>>', i: q.page, link: {path: this.$route.path, query: q}})
+      }
+
+      return data
     },
     setPageTitle (title) {
       if (title) {
@@ -121,5 +162,14 @@ export default {
 }
 .table-sm tbody td {
   padding: .4rem 1rem;
+}
+.state-loading {
+  opacity: 0.6;
+}
+.files {
+  color: #32b643;
+}
+.size {
+  color: #ffb700;
 }
 </style>
