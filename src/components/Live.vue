@@ -1,6 +1,5 @@
 <template>
   <div class="live">
-    <LoadingBar :state="loading"></LoadingBar>
     <div class="status">
       <span class="live-state" :class="{'online': running, 'offline': !running}">•</span>
       {{status}}
@@ -15,7 +14,6 @@
 
 <script>
 import api from '@/assets/js/api'
-import LoadingBar from './LoadingBar'
 import Pagination from './Pagination'
 import TableRow from './TableRow'
 
@@ -23,7 +21,6 @@ export default {
   name: 'live',
   components: {
     TableRow,
-    LoadingBar,
     Pagination
   },
   data () {
@@ -41,6 +38,7 @@ export default {
     },
     preload () {
       this.loading = true
+      this.$Progress.start()
       this.status = 'Loading'
       this.setPageTitle('Live')
       window.scrollTo(0, 0)
@@ -63,6 +61,7 @@ export default {
       })
       .finally(() => {
         this.loading = false
+        this.$Progress.finish()
       })
     },
     live (preloaded) {

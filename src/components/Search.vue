@@ -6,7 +6,6 @@
         <button class="btn btn-primary input-group-btn" @click.prevent="go">Go</button>
       </form>
     </div>
-    <LoadingBar :state="loading"></LoadingBar>
     <div class="status">
       {{status}}
     </div>
@@ -21,7 +20,6 @@
 
 <script>
 import api from '@/assets/js/api'
-import LoadingBar from './LoadingBar'
 import Pagination from './Pagination'
 import TableRow from './TableRow'
 
@@ -29,7 +27,6 @@ export default {
   name: 'search',
   components: {
     TableRow,
-    LoadingBar,
     Pagination
   },
   data () {
@@ -67,6 +64,7 @@ export default {
     },
     search () {
       this.loading = true
+      this.$Progress.start()
       this.status = 'Loading'
       if (this.q) {
         this.setPageTitle('Search ' + this.q)
@@ -90,6 +88,7 @@ export default {
       })
       .finally(() => {
         this.loading = false
+        this.$Progress.finish()
       })
     },
     calcPages (data) {
