@@ -1,13 +1,13 @@
 <template>
   <ul class="pagination">
     <li class="page-item" v-if="page.prev">
-      <router-link :to="page.prev" :disabled="page.current <= 1">Prev</router-link>
+      <router-link :to="page.prev" :disabled="page.current <= 1"><i class="ion-chevron-left"></i></router-link>
     </li>
     <li class="page-item" :class="{active: page.current === p.i}" :key="p.i" v-for="p in page.list">
       <router-link :to="p.link" :disabled="p.i < 1 || p.i > page.max">{{p.text}}</router-link>
     </li>
     <li class="page-item" v-if="page.next">
-      <router-link :to="page.next" :disabled="page.current >= page.max">Next</router-link>
+      <router-link :to="page.next" :disabled="page.current >= page.max"><i class="ion-chevron-right"></i></router-link>
     </li>
   </ul>
 </template>

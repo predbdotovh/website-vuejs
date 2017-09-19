@@ -5,3 +5,7 @@ a.disabled {
   opacity: .7;
   pointer-events: none;
 }
+
+.table-sm td {
+  padding: .4rem .2rem;
+}

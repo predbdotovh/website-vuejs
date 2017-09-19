@@ -1,0 +1,18 @@
+.content {
+    margin: 0 12px;
+}
+.state-loading {
+    opacity: 0.6;
+}
+.status {
+    margin-bottom: .8em;
+}
+.ion-14x {
+    font-size: 1.4em;
+}
+
+@media (max-width: 600px) {
+    .content {
+        margin: 0 4px;
+    }
+}

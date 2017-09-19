@@ -3,7 +3,7 @@
     <div class="search-form">
       <form class="input-group">
         <input class="form-input input-query" type="text" placeholder="Search for..." v-model="q">
-        <button class="btn btn-primary input-group-btn" @click.prevent="go">Go</button>
+        <button class="btn btn-primary input-group-btn" @click.prevent="go"><i class="ion-14x ion-search"></i></button>
       </form>
     </div>
     <div class="status">
@@ -108,7 +108,7 @@ export default {
 </script>
 
 <style>
-.search {
-  margin: 0 12px;
+.search-form {
+  margin-top: .6em;
 }
 </style>

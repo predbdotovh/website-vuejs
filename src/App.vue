@@ -26,7 +26,8 @@ export default {
 
 <style src="spectre.css/docs/dist/spectre.min.css"></style>
 <style src="@/assets/css/spectre-fixes.css"></style>
-<style src="@/assets/css/app-states.css"></style>
+<style src="@/assets/css/app.css"></style>
+<style src="ionicons/css/ionicons.css"></style>
 
 <style>
 #app {
