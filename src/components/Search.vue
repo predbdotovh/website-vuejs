@@ -20,8 +20,10 @@
 
 <script>
 import api from '@/assets/js/api'
-import Pagination from './Pagination'
-import TableRow from './TableRow'
+import utils from '@/assets/js/utils'
+import PaginableMixin from '@/mixins/PaginableMixin'
+import Pagination from '@/components/Pagination'
+import TableRow from '@/components/TableRow'
 
 export default {
   name: 'search',
@@ -29,22 +31,21 @@ export default {
     TableRow,
     Pagination
   },
+  mixins: [
+    PaginableMixin
+  ],
   data () {
     return {
       loading: false,
       status: 'Loading',
       q: '',
-      page: {
-        current: 1,
-        max: 0
-      },
       releases: []
     }
   },
   methods: {
     run () {
-      this.page.current = 1
       this.q = ''
+      this.resetPagination()
       this.parseURLQuery(this.$route)
       this.search()
     },
@@ -67,12 +68,14 @@ export default {
       this.$Progress.start()
       this.status = 'Loading'
       if (this.q) {
-        this.setPageTitle('Search ' + this.q)
+        utils.setPageTitle('Search ' + this.q)
+      } else {
+        utils.setPageTitle()
       }
       window.scrollTo(0, 0)
       const elStart = window.performance.now()
       api.query({q: this.q, page: this.page.current})
-      .then(this.calcPages)
+      .then(this.calcPagination)
       .then((data) => {
         if (!data) {
           return
@@ -91,51 +94,6 @@ export default {
         this.$Progress.finish()
       })
     },
-    calcPages (data) {
-      if (!data) {
-        return
-      }
-
-      this.page = {
-        current: Math.floor(data.offset / data.reqCount) + 1,
-        max: Math.ceil(data.total / data.reqCount),
-        list: []
-      }
-
-      {
-        let q = Object.assign({}, this.$route.query)
-        q.page = this.page.current - 1
-        this.page.list.push({text: '<<', i: q.page, link: {path: this.$route.path, query: q}})
-      }
-      let min = this.page.current - 4
-      let max = this.page.current + 4
-      for (let i = min; i <= max; i++) {
-        if (i < 1) {
-          max++
-          continue
-        }
-        if (i > this.page.max) {
-          break
-        }
-        let q = Object.assign({}, this.$route.query)
-        q.page = i
-        this.page.list.push({text: q.page, i: q.page, link: {path: this.$route.path, query: q}})
-      }
-      {
-        let q = Object.assign({}, this.$route.query)
-        q.page = this.page.current + 1
-        this.page.list.push({text: '>>', i: q.page, link: {path: this.$route.path, query: q}})
-      }
-
-      return data
-    },
-    setPageTitle (title) {
-      if (title) {
-        document.title = title + ' - PREdb'
-      } else {
-        document.title = 'PREdb'
-      }
-    },
     handleRouteUpdate () {
       this.run()
     }
@@ -152,18 +110,5 @@ export default {
 <style>
 .search {
   margin: 0 12px;
-}
-.input-group-addon .form-switch {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-.input-group-addon .form-switch .form-icon {
-  top: .1rem;
-}
-.table-sm tbody td {
-  padding: .4rem 1rem;
-}
-.state-loading {
-  opacity: 0.6;
 }
 </style>

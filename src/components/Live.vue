@@ -14,8 +14,9 @@
 
 <script>
 import api from '@/assets/js/api'
-import Pagination from './Pagination'
-import TableRow from './TableRow'
+import utils from '@/assets/js/utils'
+import Pagination from '@/components/Pagination'
+import TableRow from '@/components/TableRow'
 
 export default {
   name: 'live',
@@ -40,7 +41,7 @@ export default {
       this.loading = true
       this.$Progress.start()
       this.status = 'Loading'
-      this.setPageTitle('Live')
+      utils.setPageTitle('Live')
       window.scrollTo(0, 0)
       const elStart = window.performance.now()
       return api.fresh()
@@ -120,16 +121,9 @@ export default {
         this.running = false
         setTimeout(this.live, 1000)
       }
-      ws.onclode = () => {
+      ws.onclose = () => {
         this.status = 'Websocket closed'
         this.running = false
-      }
-    },
-    setPageTitle (title) {
-      if (title) {
-        document.title = title + ' - PREdb'
-      } else {
-        document.title = 'PREdb'
       }
     }
   },
@@ -140,11 +134,8 @@ export default {
 </script>
 
 <style>
-.table-sm tbody td {
-  padding: .4rem 1rem;
-}
-.state-loading {
-  opacity: 0.6;
+.live-state {
+  font-size: 1.4em;
 }
 .online {
   color: #32b643;

@@ -1,0 +1,7 @@
+a[disabled],
+a:disabled,
+a.disabled {
+  cursor: default;
+  opacity: .7;
+  pointer-events: none;
+}

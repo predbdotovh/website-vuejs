@@ -25,6 +25,9 @@ export default {
 </script>
 
 <style src="spectre.css/docs/dist/spectre.min.css"></style>
+<style src="@/assets/css/spectre-fixes.css"></style>
+<style src="@/assets/css/app-states.css"></style>
+
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
