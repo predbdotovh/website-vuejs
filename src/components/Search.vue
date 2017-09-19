@@ -71,7 +71,7 @@ export default {
       }
       window.scrollTo(0, 0)
       const elStart = window.performance.now()
-      api.query(this.q, this.page.current)
+      api.query({q: this.q, page: this.page.current})
       .then(this.calcPages)
       .then((data) => {
         if (!data) {
