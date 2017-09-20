@@ -45,6 +45,7 @@ export default {
   methods: {
     run () {
       this.q = ''
+      utils.setPageTitle()
       this.resetPagination()
       this.parseURLQuery(this.$route)
       this.search()
@@ -72,8 +73,6 @@ export default {
       this.status = 'Loading'
       if (this.q) {
         utils.setPageTitle('Search ' + this.q)
-      } else {
-        utils.setPageTitle()
       }
       window.scrollTo(0, 0)
       const elStart = window.performance.now()

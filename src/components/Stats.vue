@@ -8,18 +8,34 @@
 
 <script>
 import api from '@/assets/js/api'
+import utils from '@/assets/js/utils'
 
 export default {
   name: 'stats',
   data () {
     return {
+      loading: false,
       stats: {}
     }
   },
+  methods: {
+    run () {
+      utils.setPageTitle('Stats')
+      this.loadStats()
+    },
+    loadStats () {
+      this.loading = true
+      this.$Progress.start()
+      api.stats().then((stats) => {
+        this.stats = stats
+      }).finally(() => {
+        this.loading = false
+        this.$Progress.finish()
+      })
+    }
+  },
   created () {
-    api.stats().then((stats) => {
-      this.stats = stats
-    })
+    this.run()
   }
 }
 </script>

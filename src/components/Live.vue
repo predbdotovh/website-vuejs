@@ -34,6 +34,7 @@ export default {
   },
   methods: {
     run () {
+      utils.setPageTitle('Live')
       this.preload()
       .then(this.live)
     },
@@ -41,7 +42,6 @@ export default {
       this.loading = true
       this.$Progress.start()
       this.status = 'Loading'
-      utils.setPageTitle('Live')
       window.scrollTo(0, 0)
       const elStart = window.performance.now()
       return api.fresh()
@@ -109,7 +109,7 @@ export default {
             if (j.row.nuke) {
               const index = this.releases.findIndex((e) => { e.id === j.row.id })
               if (index !== -1) {
-                this.releases = j.row
+                this.releases[index] = j.row
               }
             }
             break
@@ -119,7 +119,7 @@ export default {
       ws.onerror = () => {
         this.status = 'Websocket error'
         this.running = false
-        setTimeout(this.live, 1000)
+        setTimeout(this.run, 1000)
       }
       ws.onclose = () => {
         this.status = 'Websocket closed'
