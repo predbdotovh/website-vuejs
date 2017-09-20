@@ -1,7 +1,9 @@
 <template>
   <div class="live">
     <div class="status">
-      <span class="live-state" :class="{'online': running, 'offline': !running}">•</span>
+      <span class="live-state" :class="{online: running, offline: !running}">
+        <div class="ion-record" :class="{pulse: running}"></div>
+      </span>
       {{status}}
     </div>
     <table class="table table-sm table-striped table-hover" :class="{'state-loading': loading}" v-if="releases.length">
@@ -135,7 +137,7 @@ export default {
 
 <style>
 .live-state {
-  font-size: 1.4em;
+  display: inline-block;
 }
 .online {
   color: #32b643;
