@@ -101,6 +101,9 @@ export default {
   created () {
     this.run()
   },
+  mounted () {
+    this.$refs.input.focus()
+  },
   watch: {
     '$route': 'handleRouteUpdate'
   }
