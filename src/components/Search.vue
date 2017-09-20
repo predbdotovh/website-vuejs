@@ -2,7 +2,7 @@
   <div class="search">
     <div class="search-form">
       <form class="input-group">
-        <input class="form-input input-query" type="text" placeholder="Search for..." v-model="q">
+        <input class="form-input input-query" ref="input" type="text" placeholder="Search for..." v-model="q">
         <button class="btn btn-primary input-group-btn" @click.prevent="go"><i class="ion-14x ion-search"></i></button>
       </form>
     </div>

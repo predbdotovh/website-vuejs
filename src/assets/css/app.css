@@ -16,3 +16,6 @@
         margin: 0 4px;
     }
 }
+.navbar a.router-link-exact-active {
+    font-weight: bold;
+}
