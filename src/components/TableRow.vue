@@ -18,7 +18,7 @@
     </td>
     <td>
       <div class="date" v-if="r.preAt">
-        {{new Date(r.preAt * 1000).toLocaleString()}}
+        {{preAt.toLocaleDateString()}} {{preAt.toLocaleTimeString()}}
       </div>
       <div class="files" v-if="r.files">
         {{r.files}}<span class="files-symbol">F</span>
@@ -44,6 +44,11 @@ export default {
       type: Object,
       default: {}
     }
+  },
+  computed: {
+    preAt () {
+      return new Date(this.r.preAt * 1000)
+    }
   }
 }
 </script>
@@ -53,6 +58,7 @@ export default {
   display: inline-block;
 }
 .genre {
+  margin-left: .6em;
   display: inline-block;
 }
 .name {
@@ -74,12 +80,14 @@ export default {
   display: inline-block;
 }
 .files {
+  margin-left: .6em;
   display: inline-block;
 }
 .files-symbol {
   color: #32b643;
 }
 .size {
+  margin-left: .6em;
   display: inline-block;
 }
 .size-symbol {
@@ -92,6 +100,17 @@ export default {
   }
   .genre {
     word-break: break-all;
+  }
+}
+@media (max-width: 840px) {
+  .genre {
+    margin-left: unset;
+  }
+  .files {
+    margin-left: unset;
+  }
+  .size {
+    margin-left: unset;
   }
 }
 </style>
