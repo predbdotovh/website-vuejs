@@ -4,7 +4,7 @@
       <div class="cat">
         <router-link :to="{name: 'search', query: {q: '@cat ' + r.cat}}">{{r.cat}}</router-link>
       </div>
-      <div class="genre" v-if="r.genre">
+      <div class="genre" :title="r.genre" v-if="r.genre">
         {{r.genre.substring(0, 36)}}
       </div>
     </td>
@@ -21,10 +21,10 @@
         {{preAt.toLocaleDateString()}} {{preAt.toLocaleTimeString()}}
       </div>
       <div class="files" v-if="r.files">
-        {{r.files}}<span class="files-symbol">F</span>
+        {{r.files}}<span class="files-symbol" title="Files">F</span>
       </div>
       <div class="size" v-if="r.size">
-        {{Math.round(r.size * 100) / 100}}<span class="size-symbol">MB</span>
+        {{Math.round(r.size * 100) / 100}}<span class="size-symbol" title="Size">MB</span>
       </div>
     </td>
   </tr>
