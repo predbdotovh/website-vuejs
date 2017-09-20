@@ -59,9 +59,12 @@ export default {
       }
     },
     generateURLQuery () {
-      return {
-        q: this.q
+      const query = {}
+      if (this.q) {
+        query.q = this.q
       }
+
+      return query
     },
     search () {
       this.loading = true
