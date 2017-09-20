@@ -57,6 +57,12 @@ const api = {
     .then((json) => {
       return json.data
     })
+  },
+  stats () {
+    return this.get('stats', {})
+    .then((json) => {
+      return json.data
+    })
   }
 }
 
