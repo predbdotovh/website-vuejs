@@ -88,14 +88,14 @@ export default {
             break
           }
           case 'update': {
-            const index = this.releases.findIndex((e) => { e.id === j.row.id })
+            const index = this.releases.findIndex((e) => e.id === j.row.id)
             if (index !== -1) {
               this.releases[index] = j.row
             }
             break
           }
           case 'delete': {
-            const index = this.releases.findIndex((e) => { e.id === j.row.id })
+            const index = this.releases.findIndex((e) => e.id === j.row.id)
             if (index !== -1) {
               this.releases.splice(index, 1)
             }
@@ -107,7 +107,7 @@ export default {
           case 'delpre':
           case 'undelpre': {
             if (j.row.nuke) {
-              const index = this.releases.findIndex((e) => { e.id === j.row.id })
+              const index = this.releases.findIndex((e) => e.id === j.row.id)
               if (index !== -1) {
                 this.releases[index] = j.row
               }
