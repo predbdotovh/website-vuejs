@@ -11,8 +11,7 @@ const api = {
   },
   checkHTTP (res) {
     if (!res || res.status !== 200) {
-      this.err('Unexpected response from API')
-      return
+      return api.err('Unexpected response from API')
     }
 
     return res
@@ -22,13 +21,11 @@ const api = {
   },
   checkStatus (json) {
     if (!json) {
-      this.err('Unexpected response from API')
-      return
+      return api.err('Unexpected response from API')
     }
 
     if (json.status !== 'success') {
-      this.err(json.message.replace('\0', ''), json)
-      return
+      return api.err(json.message.replace('\0', ''), json)
     }
 
     return json
