@@ -19,9 +19,7 @@
         {{ r.name.replace('-' + r.team, '') }}<router-link
           class="text-italic"
           :to="{name: 'search', query: {q: '@team ' + r.team}}"
-        >
-          -{{ r.team }}
-        </router-link>
+        >-{{ r.team }}</router-link><!-- eslint-disable-line -->
       </div>
       <div
         v-if="r.nuke"
