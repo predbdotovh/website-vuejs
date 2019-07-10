@@ -8,7 +8,7 @@
         :to="page.prev"
         :disabled="page.current <= 1"
       >
-        <i class="ion-chevron-left" />
+        <i class="icon ion-ios-arrow-back" />
       </router-link>
     </li>
     <li
@@ -32,7 +32,7 @@
         :to="page.next"
         :disabled="page.current >= page.max"
       >
-        <i class="ion-chevron-right" />
+        <i class="icon ion-ios-arrow-forward" />
       </router-link>
     </li>
   </ul>

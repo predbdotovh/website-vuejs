@@ -6,7 +6,7 @@
         :class="{online: running, offline: !running}"
       >
         <div
-          class="ion-record"
+          class="icon ion-md-wifi"
           :class="{pulse: running}"
         />
       </span>

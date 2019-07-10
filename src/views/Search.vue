@@ -13,7 +13,7 @@
           class="btn btn-primary input-group-btn"
           @click.prevent="go"
         >
-          <i class="ion-14x ion-search" />
+          <i class="icon ion-14x ion-md-search" />
         </button>
       </form>
     </div>

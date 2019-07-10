@@ -6,27 +6,27 @@
           class="btn btn-link navbar-brand"
           :to="{name: 'search'}"
         >
-          <i class="ion-home" /> PREdb
+          <i class="icon ion-md-home" /> PREdb
         </router-link>
         <router-link
           class="btn btn-link"
           :to="{name: 'stats'}"
         >
-          <i class="ion-ios-pulse-strong" /> Stats
+          <i class="icon ion-ios-pulse" /> Stats
         </router-link>
         <a
           class="btn btn-link"
           href="https://predbdotovh.github.io/pre-api/"
           target="_blank"
         >
-          <i class="ion-ios-book" /> API
+          <i class="icon ion-ios-book" /> API
         </a>
         <a
           class="btn btn-link"
           href="https://telegram.me/predbbot"
           target="_blank"
         >
-          <i class="ion-chatbubbles" /> Telegram Bot
+          <i class="icon ion-ios-chatbubbles" /> Telegram Bot
         </a>
       </section>
       <section class="navbar-center">
@@ -34,7 +34,7 @@
           class="btn btn-link"
           :to="{name: 'live'}"
         >
-          <i class="ion-play" /> Realtime
+          <i class="icon ion-md-play" /> Realtime
         </router-link>
       </section>
       <section class="navbar-section">
@@ -43,7 +43,7 @@
           href="https://github.com/predbdotovh"
           target="_blank"
         >
-          <i class="ion-social-github" /> Github
+          <i class="icon ion-logo-github" /> Github
         </a>
       </section>
     </header>
@@ -57,7 +57,7 @@
 <style src="spectre.css/docs/dist/spectre.min.css"></style>
 <style src="@/assets/css/spectre-fixes.css"></style>
 <style src="@/assets/css/app.css"></style>
-<style src="ionicons/css/ionicons.css"></style>
+<style src="ionicons/dist/css/ionicons.css"></style>
 
 <style lang="scss">
 #app {
