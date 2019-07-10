@@ -17,7 +17,7 @@
         </button>
       </form>
     </div>
-    <div class="status">
+    <div class="status-bar">
       {{ status }}
     </div>
     <table

@@ -1,6 +1,6 @@
 <template>
   <div class="live">
-    <div class="status">
+    <div class="status-bar">
       <span
         class="live-state"
         :class="{online: running, offline: !running}"

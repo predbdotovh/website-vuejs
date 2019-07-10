@@ -55,7 +55,6 @@
 </template>
 
 <style src="spectre.css/docs/dist/spectre.min.css"></style>
-<style src="@/assets/css/spectre-fixes.css"></style>
 <style src="@/assets/css/app.css"></style>
 <style src="ionicons/dist/css/ionicons.css"></style>
 
@@ -67,11 +66,25 @@
   text-align: center;
   color: #2c3e50;
 }
+
 .navbar {
+  i.icon {
+    font-size: 1rem;
+  }
   a {
     &.router-link-exact-active {
       font-weight: bold;
     }
+  }
+}
+
+/* Small-ish margins on main container */
+.content {
+  margin: 0 12px;
+}
+@media (max-width: 600px) {
+  .content {
+    margin: 0 4px;
   }
 }
 </style>

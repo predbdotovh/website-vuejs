@@ -1,40 +1,47 @@
-.content {
-    margin: 0 12px;
-}
+/* Styles shared with most views */
+
 .state-loading {
-    opacity: 0.6;
+  opacity: 0.6;
 }
-.status {
-    margin-bottom: .8em;
+
+.status-bar {
+  margin-bottom: 0.8em;
 }
+
+/* Goes up to 14x ! Used for search button icon */
 .ion-14x {
-    font-size: 1.4em;
+  font-size: 1.4em;
 }
 
-@media (max-width: 600px) {
-    .content {
-        margin: 0 4px;
-    }
-}
-.navbar a.router-link-exact-active {
-    font-weight: bold;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    10% {
-        transform: scale(.9);
-        opacity: .9;
-    }
-    20% {
-        transform: scale(1);
-        opacity: 1;
-    }
+/* Make sure disabled links do really look disabled */
+a[disabled],
+a:disabled,
+a.disabled {
+  cursor: default;
+  opacity: 0.7;
+  pointer-events: none;
 }
 
+/* Add smaller than default spectre.css paddings on .table-sm */
+.table-sm td {
+  padding: 0.4rem 0.2rem;
+}
+
+/* Pulse animation for realtime icon */
 .pulse {
-    animation: pulse 4s infinite ease;
+  animation: pulse 4s infinite ease;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  10% {
+    transform: scale(0.9);
+    opacity: 0.9;
+  }
+  20% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
