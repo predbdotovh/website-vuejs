@@ -1,5 +1,15 @@
 <template>
-  <div class="stats">
+  <div
+    v-if="loading"
+    class="loading-wrapper"
+  >
+    <div class="loading" />
+    Loading stats
+  </div>
+  <div
+    v-else
+    class="stats"
+  >
     <div class="stats-total">
       Total releases : {{ stats.total }}
     </div>
