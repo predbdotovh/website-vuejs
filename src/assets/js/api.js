@@ -31,19 +31,19 @@ const api = {
     return json
   },
   get (path, params) {
-    return Vue.http.get(apiEndpoint + path, {params: params})
-    .then(this.checkHTTP)
-    .then(this.parseJson)
-    .then(this.checkStatus)
+    return Vue.http.get(apiEndpoint + path, { params: params })
+      .then(this.checkHTTP)
+      .then(this.parseJson)
+      .then(this.checkStatus)
   },
   websocket () {
     return new WebSocket(wssEndpoint)
   },
   fresh () {
     return this.get('live', {})
-    .then((json) => {
-      return json.data
-    })
+      .then((json) => {
+        return json.data
+      })
   },
   query (params = {}) {
     if ('page' in params && params.page === 1) {
@@ -51,15 +51,15 @@ const api = {
     }
 
     return this.get('', params)
-    .then((json) => {
-      return json.data
-    })
+      .then((json) => {
+        return json.data
+      })
   },
   stats () {
     return this.get('stats', {})
-    .then((json) => {
-      return json.data
-    })
+      .then((json) => {
+        return json.data
+      })
   }
 }
 

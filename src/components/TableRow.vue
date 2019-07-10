@@ -1,30 +1,60 @@
-<<template>
+<template>
   <tr>
     <td>
       <div class="cat">
-        <router-link :to="{name: 'search', query: {q: '@cat ' + r.cat}}">{{r.cat}}</router-link>
+        <router-link :to="{name: 'search', query: {q: '@cat ' + r.cat}}">
+          {{ r.cat }}
+        </router-link>
       </div>
-      <div class="genre" :title="r.genre" v-if="r.genre">
-        {{r.genre.substring(0, 36)}}
+      <div
+        v-if="r.genre"
+        class="genre"
+        :title="r.genre"
+      >
+        {{ r.genre.substring(0, 36) }}
       </div>
     </td>
     <td>
       <div class="name">
-        {{r.name.replace('-' + r.team, '')}}<router-link class="text-italic" :to="{name: 'search', query: {q: '@team ' + r.team}}">-{{r.team}}</router-link>
+        {{ r.name.replace('-' + r.team, '') }}<router-link
+          class="text-italic"
+          :to="{name: 'search', query: {q: '@team ' + r.team}}"
+        >
+          -{{ r.team }}
+        </router-link>
       </div>
-      <div class="nuke" :class="{'nuke-nuked': nukeNuke.includes(r.nuke.type), 'nuke-fine': nukeFine.includes(r.nuke.type)}" v-if="r.nuke">
-        {{r.nuke.reason}} - <span class="nuke-net">{{r.nuke.net}}</span>
+      <div
+        v-if="r.nuke"
+        class="nuke"
+        :class="{'nuke-nuked': nukeNuke.includes(r.nuke.type), 'nuke-fine': nukeFine.includes(r.nuke.type)}"
+      >
+        {{ r.nuke.reason }} - <span class="nuke-net">{{ r.nuke.net }}</span>
       </div>
     </td>
     <td>
-      <div class="date" v-if="r.preAt">
-        {{preAt.toLocaleDateString()}} {{preAt.toLocaleTimeString()}}
+      <div
+        v-if="r.preAt"
+        class="date"
+      >
+        {{ preAt.toLocaleDateString() }} {{ preAt.toLocaleTimeString() }}
       </div>
-      <div class="files" v-if="r.files">
-        {{r.files}}<span class="files-symbol" title="Files">F</span>
+      <div
+        v-if="r.files"
+        class="files"
+      >
+        {{ r.files }}<span
+          class="files-symbol"
+          title="Files"
+        >F</span>
       </div>
-      <div class="size" v-if="r.size">
-        {{Math.round(r.size * 100) / 100}}<span class="size-symbol" title="Size">MB</span>
+      <div
+        v-if="r.size"
+        class="size"
+      >
+        {{ Math.round(r.size * 100) / 100 }}<span
+          class="size-symbol"
+          title="Size"
+        >MB</span>
       </div>
     </td>
   </tr>
@@ -32,17 +62,19 @@
 
 <script>
 export default {
-  name: 'table-row',
+  name: 'TableRow',
+  props: {
+    r: {
+      type: Object,
+      default: () => {
+        return {}
+      }
+    }
+  },
   data () {
     return {
       nukeFine: ['unnuke', 'undelpre'],
       nukeNuke: ['nuke', 'modnuke', 'delpre']
-    }
-  },
-  props: {
-    r: {
-      type: Object,
-      default: {}
     }
   },
   computed: {
@@ -53,12 +85,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .cat {
   display: inline-block;
 }
 .genre {
-  margin-left: .6em;
+  margin-left: 0.6em;
   display: inline-block;
 }
 .name {
@@ -80,14 +112,14 @@ export default {
   display: inline-block;
 }
 .files {
-  margin-left: .6em;
+  margin-left: 0.6em;
   display: inline-block;
 }
 .files-symbol {
   color: #32b643;
 }
 .size {
-  margin-left: .6em;
+  margin-left: 0.6em;
   display: inline-block;
 }
 .size-symbol {

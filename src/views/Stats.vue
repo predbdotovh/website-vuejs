@@ -1,8 +1,14 @@
 <template>
   <div class="stats">
-    <div class="stats-total">Total releases : {{stats.total}}</div>
-    <div class="stats-gentime">Average search duration : {{Math.round(stats.time * 1000)}}ms</div>
-    <div class="stats-upddate">Last update : {{new Date(stats.date).toLocaleString()}}</div>
+    <div class="stats-total">
+      Total releases : {{ stats.total }}
+    </div>
+    <div class="stats-gentime">
+      Average search duration : {{ Math.round(stats.time * 1000) }}ms
+    </div>
+    <div class="stats-upddate">
+      Last update : {{ new Date(stats.date).toLocaleString() }}
+    </div>
   </div>
 </template>
 
@@ -11,12 +17,15 @@ import api from '@/assets/js/api'
 import utils from '@/assets/js/utils'
 
 export default {
-  name: 'stats',
+  name: 'Stats',
   data () {
     return {
       loading: false,
       stats: {}
     }
+  },
+  created () {
+    this.run()
   },
   methods: {
     run () {
@@ -33,9 +42,6 @@ export default {
         this.$Progress.finish()
       })
     }
-  },
-  created () {
-    this.run()
   }
 }
 </script>

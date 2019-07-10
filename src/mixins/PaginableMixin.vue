@@ -1,6 +1,6 @@
-<<script>
+<script>
 export default {
-  name: 'paginable-mixin',
+  name: 'PaginableMixin',
   data () {
     return {
       page: {
@@ -29,7 +29,7 @@ export default {
         list: []
       }
 
-      this.page.prev = {path: this.$route.path, query: Object.assign({}, this.$route.query, {page: this.page.current - 1})}
+      this.page.prev = { path: this.$route.path, query: Object.assign({}, this.$route.query, { page: this.page.current - 1 }) }
       let min = this.page.current - 4
       let max = this.page.current + 4
       for (let i = min; i <= max; i++) {
@@ -42,9 +42,9 @@ export default {
         }
         let q = Object.assign({}, this.$route.query)
         q.page = i
-        this.page.list.push({text: q.page, i: q.page, link: {path: this.$route.path, query: q}})
+        this.page.list.push({ text: q.page, i: q.page, link: { path: this.$route.path, query: q } })
       }
-      this.page.next = {path: this.$route.path, query: Object.assign({}, this.$route.query, {page: this.page.current + 1})}
+      this.page.next = { path: this.$route.path, query: Object.assign({}, this.$route.query, { page: this.page.current + 1 }) }
 
       return data
     }

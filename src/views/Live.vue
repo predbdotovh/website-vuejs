@@ -1,14 +1,28 @@
 <template>
   <div class="live">
     <div class="status">
-      <span class="live-state" :class="{online: running, offline: !running}">
-        <div class="ion-record" :class="{pulse: running}"></div>
+      <span
+        class="live-state"
+        :class="{online: running, offline: !running}"
+      >
+        <div
+          class="ion-record"
+          :class="{pulse: running}"
+        />
       </span>
-      {{status}}
+      {{ status }}
     </div>
-    <table class="table table-sm table-striped table-hover" :class="{'state-loading': loading}" v-if="releases.length">
+    <table
+      v-if="releases.length"
+      class="table table-sm table-striped table-hover"
+      :class="{'state-loading': loading}"
+    >
       <tbody>
-        <TableRow v-for="row in releases" :r="row" :key="row.id"></TableRow>
+        <TableRow
+          v-for="row in releases"
+          :key="row.id"
+          :r="row"
+        />
       </tbody>
     </table>
   </div>
@@ -17,14 +31,12 @@
 <script>
 import api from '@/assets/js/api'
 import utils from '@/assets/js/utils'
-import Pagination from '@/components/Pagination'
-import TableRow from '@/components/TableRow'
+import TableRow from '@/components/TableRow.vue'
 
 export default {
-  name: 'live',
+  name: 'Live',
   components: {
-    TableRow,
-    Pagination
+    TableRow
   },
   data () {
     return {
@@ -34,11 +46,14 @@ export default {
       releases: []
     }
   },
+  created () {
+    this.run()
+  },
   methods: {
     run () {
       utils.setPageTitle('Live')
       this.preload()
-      .then(this.live)
+        .then(this.live)
     },
     preload () {
       this.loading = true
@@ -47,25 +62,25 @@ export default {
       window.scrollTo(0, 0)
       const elStart = window.performance.now()
       return api.fresh()
-      .then((data) => {
-        if (!data) {
-          return
-        }
+        .then((data) => {
+          if (!data) {
+            return
+          }
 
-        const elSeconds = Math.round(window.performance.now() - elStart) / 1000
-        this.status = 'Results ' + (data.offset + 1) + '-' + (data.offset + data.rowCount) +
+          const elSeconds = Math.round(window.performance.now() - elStart) / 1000
+          this.status = 'Results ' + (data.offset + 1) + '-' + (data.offset + data.rowCount) +
           ' of ' + data.total + ' matches in ' + elSeconds + ' seconds'
-        this.releases = data.rows
+          this.releases = data.rows
 
-        return true
-      })
-      .catch((err) => {
-        this.status = err.message || 'Error while loading releases'
-      })
-      .finally(() => {
-        this.loading = false
-        this.$Progress.finish()
-      })
+          return true
+        })
+        .catch((err) => {
+          this.status = err.message || 'Error while loading releases'
+        })
+        .finally(() => {
+          this.loading = false
+          this.$Progress.finish()
+        })
     },
     live (preloaded) {
       if (!preloaded) {
@@ -128,14 +143,11 @@ export default {
         this.running = false
       }
     }
-  },
-  created () {
-    this.run()
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 .live-state {
   display: inline-block;
 }
