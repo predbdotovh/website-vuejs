@@ -31,7 +31,8 @@ const api = {
     return json
   },
   get (path, params) {
-    return Vue.http.get(apiEndpoint + path, { params: params })
+    return Vue.http
+      .get(apiEndpoint + path, { params: params })
       .then(this.checkHTTP)
       .then(this.parseJson)
       .then(this.checkStatus)
@@ -40,26 +41,23 @@ const api = {
     return new WebSocket(wssEndpoint)
   },
   fresh () {
-    return this.get('live', {})
-      .then((json) => {
-        return json.data
-      })
+    return this.get('live', {}).then(json => {
+      return json.data
+    })
   },
   query (params = {}) {
     if ('page' in params && params.page === 1) {
       delete params.page
     }
 
-    return this.get('', params)
-      .then((json) => {
-        return json.data
-      })
+    return this.get('', params).then(json => {
+      return json.data
+    })
   },
   stats () {
-    return this.get('stats', {})
-      .then((json) => {
-        return json.data
-      })
+    return this.get('stats', {}).then(json => {
+      return json.data
+    })
   }
 }
 
