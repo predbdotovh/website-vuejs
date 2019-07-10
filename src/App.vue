@@ -1,5 +1,8 @@
 <template>
-  <div id="app">
+  <div
+    id="app"
+    :class="$store.getters.appTheme"
+  >
     <header class="navbar">
       <section class="navbar-section">
         <router-link
@@ -38,6 +41,15 @@
         </router-link>
       </section>
       <section class="navbar-section">
+        <div>
+          <label class="form-switch">
+            <input
+              v-model="theme"
+              type="checkbox"
+            >
+            <i class="form-icon" /> Dark theme
+          </label>
+        </div>
         <a
           class="btn btn-link"
           href="https://github.com/predbdotovh"
@@ -54,17 +66,40 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App',
+  computed: {
+    theme: {
+      get () {
+        return this.$store.state.darkTheme
+      },
+      set (value) {
+        this.$store.commit('setDarkTheme', value)
+      }
+    }
+  }
+}
+</script>
+
 <style src="spectre.css/docs/dist/spectre.min.css"></style>
-<style src="@/assets/css/app.css"></style>
 <style src="ionicons/dist/css/ionicons.css"></style>
+<style src="@/assets/css/app.css"></style>
+<style src="@/assets/css/theme-dark.scss" lang="scss"></style>
 
 <style lang="scss">
+html,
+body {
+  height: 100%;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100%;
 }
 
 .navbar {

@@ -1,0 +1,23 @@
+#app.theme-dark {
+  background-color: #191c23;
+  color: #d6d4d0;
+}
+
+.theme-dark {
+  input[type="text"] {
+    color: #d6d4d0;
+    background-color: #14171d;
+  }
+
+  .table td {
+    border-bottom-color: #3e4b59;
+  }
+
+  .table.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #252c33;
+  }
+
+  .table.table-hover tbody tr:hover {
+    background-color: #14171d;
+  }
+}

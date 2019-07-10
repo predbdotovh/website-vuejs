@@ -29,6 +29,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
     "ionicons": "^4.6.1",
+    "js-cookie": "^2.2.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "spectre.css": "^0.5.8",
