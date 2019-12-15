@@ -30,7 +30,7 @@ export default {
       }
 
       this.page.prev = { path: this.$route.path, query: Object.assign({}, this.$route.query, { page: this.page.current - 1 }) }
-      let min = this.page.current - 4
+      const min = this.page.current - 4
       let max = this.page.current + 4
       for (let i = min; i <= max; i++) {
         if (i < 1) {
@@ -40,7 +40,7 @@ export default {
         if (i > this.page.max) {
           break
         }
-        let q = Object.assign({}, this.$route.query)
+        const q = Object.assign({}, this.$route.query)
         q.page = i
         this.page.list.push({ text: q.page, i: q.page, link: { path: this.$route.path, query: q } })
       }

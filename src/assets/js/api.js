@@ -5,7 +5,7 @@ const wssEndpoint = 'wss://predb.ovh/api/v1/ws'
 
 const api = {
   err (msg, ctx) {
-    let err = new Error(msg)
+    const err = new Error(msg)
     err.ctx = ctx
     throw err
   },

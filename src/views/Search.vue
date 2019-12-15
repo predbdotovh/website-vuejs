@@ -23,7 +23,7 @@
     <table
       v-if="releases.length"
       class="table table-sm table-striped table-hover"
-      :class="{'state-loading': loading}"
+      :class="{ 'state-loading': loading }"
     >
       <tbody>
         <TableRow
@@ -50,9 +50,7 @@ export default {
     TableRow,
     Pagination
   },
-  mixins: [
-    PaginableMixin
-  ],
+  mixins: [PaginableMixin],
   data () {
     return {
       loading: false,
@@ -62,7 +60,7 @@ export default {
     }
   },
   watch: {
-    '$route': 'handleRouteUpdate'
+    $route: 'handleRouteUpdate'
   },
   created () {
     this.run()
@@ -104,19 +102,29 @@ export default {
       }
       window.scrollTo(0, 0)
       const elStart = window.performance.now()
-      api.query({ q: this.q, page: this.page.current })
+      api
+        .query({ q: this.q, page: this.page.current })
         .then(this.calcPagination)
-        .then((data) => {
+        .then(data => {
           if (!data) {
             return
           }
 
-          const elSeconds = Math.round(window.performance.now() - elStart) / 1000
-          this.status = 'Results ' + (data.offset + 1) + '-' + (data.offset + data.rowCount) +
-          ' of ' + data.total + ' matches in ' + elSeconds + ' seconds'
+          const elSeconds =
+            Math.round(window.performance.now() - elStart) / 1000
+          this.status =
+            'Results ' +
+            (data.offset + 1) +
+            '-' +
+            (data.offset + data.rowCount) +
+            ' of ' +
+            data.total +
+            ' matches in ' +
+            elSeconds +
+            ' seconds'
           this.releases = data.rows
         })
-        .catch((err) => {
+        .catch(err => {
           this.status = err.message || 'Error while loading releases'
         })
         .finally(() => {
