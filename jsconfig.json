@@ -1,0 +1,9 @@
+{
+  "exclude": ["node_modules", "dist", "public"],
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"]
+    }
+  }
+}
