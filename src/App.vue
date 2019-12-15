@@ -31,6 +31,13 @@
         >
           <i class="icon ion-ios-chatbubbles" /> Telegram Bot
         </a>
+        <a
+          class="btn btn-link"
+          href="https://predb.ovh/api/v1/rss"
+          target="_blank"
+        >
+          <i class="icon ion-logo-rss" /> RSS
+        </a>
       </section>
       <section class="navbar-center">
         <router-link
