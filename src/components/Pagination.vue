@@ -15,7 +15,7 @@
       v-for="p in page.list"
       :key="p.i"
       class="page-item"
-      :class="{active: page.current === p.i}"
+      :class="{ active: page.current === p.i }"
     >
       <router-link
         :to="p.link"

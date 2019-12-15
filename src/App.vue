@@ -7,13 +7,13 @@
       <section class="navbar-section">
         <router-link
           class="btn btn-link navbar-brand"
-          :to="{name: 'search'}"
+          :to="{ name: 'search' }"
         >
           <i class="icon ion-md-home" /> PREdb
         </router-link>
         <router-link
           class="btn btn-link"
-          :to="{name: 'stats'}"
+          :to="{ name: 'stats' }"
         >
           <i class="icon ion-ios-pulse" /> Stats
         </router-link>
@@ -42,7 +42,7 @@
       <section class="navbar-center">
         <router-link
           class="btn btn-link"
-          :to="{name: 'live'}"
+          :to="{ name: 'live' }"
         >
           <i class="icon ion-md-play" /> Realtime
         </router-link>
@@ -101,7 +101,7 @@ body {
 }
 
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

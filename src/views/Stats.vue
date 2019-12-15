@@ -45,12 +45,15 @@ export default {
     loadStats () {
       this.loading = true
       this.$Progress.start()
-      api.stats().then((stats) => {
-        this.stats = stats
-      }).finally(() => {
-        this.loading = false
-        this.$Progress.finish()
-      })
+      api
+        .stats()
+        .then(stats => {
+          this.stats = stats
+        })
+        .finally(() => {
+          this.loading = false
+          this.$Progress.finish()
+        })
     }
   }
 }

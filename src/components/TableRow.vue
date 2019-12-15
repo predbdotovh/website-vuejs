@@ -2,7 +2,7 @@
   <tr>
     <td>
       <div class="cat">
-        <router-link :to="{name: 'search', query: {q: '@cat ' + r.cat}}">
+        <router-link :to="{ name: 'search', query: { q: '@cat ' + r.cat } }">
           {{ r.cat }}
         </router-link>
       </div>
@@ -16,15 +16,20 @@
     </td>
     <td>
       <div class="name">
-        {{ r.name.replace('-' + r.team, '') }}<router-link
+        {{ r.name.replace('-' + r.team, '')
+        }}<router-link
           class="text-italic"
-          :to="{name: 'search', query: {q: '@team ' + r.team}}"
-        >-{{ r.team }}</router-link><!-- eslint-disable-line -->
+          :to="{ name: 'search', query: { q: '@team ' + r.team } }"
+          >-<!-- eslint-disable-line -->{{ r.team }}
+        </router-link>
       </div>
       <div
         v-if="r.nuke"
         class="nuke"
-        :class="{'nuke-nuked': nukeNuke.includes(r.nuke.type), 'nuke-fine': nukeFine.includes(r.nuke.type)}"
+        :class="{
+          'nuke-nuked': nukeNuke.includes(r.nuke.type),
+          'nuke-fine': nukeFine.includes(r.nuke.type)
+        }"
       >
         {{ r.nuke.reason }} - <span class="nuke-net">{{ r.nuke.net }}</span>
       </div>
@@ -34,7 +39,8 @@
         v-if="r.preAt"
         class="date"
       >
-        {{ preAt.toLocaleDateString() }} {{ preAt.toLocaleTimeString() }}
+        {{ preAt.toLocaleDateString() }}
+        {{ preAt.toLocaleTimeString() }}
       </div>
       <div
         v-if="r.files"
@@ -49,7 +55,8 @@
         v-if="r.size"
         class="size"
       >
-        {{ Math.round(r.size * 100) / 100 }}<span
+        {{ Math.round(r.size * 100) / 100
+        }}<span
           class="size-symbol"
           title="Size"
         >MB</span>

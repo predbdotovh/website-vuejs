@@ -3,11 +3,11 @@
     <div class="status-bar">
       <span
         class="live-state"
-        :class="{online: running, offline: !running}"
+        :class="{ online: running, offline: !running }"
       >
         <div
           class="icon ion-md-wifi"
-          :class="{pulse: running}"
+          :class="{ pulse: running }"
         />
       </span>
       {{ status }}
@@ -15,7 +15,7 @@
     <table
       v-if="releases.length"
       class="table table-sm table-striped table-hover"
-      :class="{'state-loading': loading}"
+      :class="{ 'state-loading': loading }"
     >
       <tbody>
         <TableRow
@@ -52,8 +52,7 @@ export default {
   methods: {
     run () {
       utils.setPageTitle('Live')
-      this.preload()
-        .then(this.live)
+      this.preload().then(this.live)
     },
     preload () {
       this.loading = true
@@ -61,20 +60,21 @@ export default {
       this.status = 'Loading'
       window.scrollTo(0, 0)
       const elStart = window.performance.now()
-      return api.fresh()
-        .then((data) => {
+      return api
+        .fresh()
+        .then(data => {
           if (!data) {
             return
           }
 
-          const elSeconds = Math.round(window.performance.now() - elStart) / 1000
-          this.status = 'Results ' + (data.offset + 1) + '-' + (data.offset + data.rowCount) +
-          ' of ' + data.total + ' matches in ' + elSeconds + ' seconds'
+          const sec = Math.round(window.performance.now() - elStart) / 1000
+          this.status = `Results ${data.offset + 1}-${data.offset +
+            data.rowCount} of ${data.total} matches in ${sec} seconds`
           this.releases = data.rows
 
           return true
         })
-        .catch((err) => {
+        .catch(err => {
           this.status = err.message || 'Error while loading releases'
         })
         .finally(() => {
@@ -88,31 +88,31 @@ export default {
       }
 
       const ws = api.websocket()
-      ws.onopen = (e) => {
+      ws.onopen = e => {
         this.running = true
         this.status = 'Websocket started'
       }
-      ws.onmessage = (e) => {
+      ws.onmessage = e => {
         const j = JSON.parse(e.data)
         if (!j.action) {
           return
         }
 
-        this.status = 'Last update : ' + new Date().toLocaleString()
+        this.status = `Last update : ${new Date().toLocaleString()}`
         switch (j.action) {
           case 'insert': {
             this.releases.unshift(j.row)
             break
           }
           case 'update': {
-            const index = this.releases.findIndex((e) => e.id === j.row.id)
+            const index = this.releases.findIndex(e => e.id === j.row.id)
             if (index !== -1) {
               this.releases[index] = j.row
             }
             break
           }
           case 'delete': {
-            const index = this.releases.findIndex((e) => e.id === j.row.id)
+            const index = this.releases.findIndex(e => e.id === j.row.id)
             if (index !== -1) {
               this.releases.splice(index, 1)
             }
@@ -124,7 +124,7 @@ export default {
           case 'delpre':
           case 'undelpre': {
             if (j.row.nuke) {
-              const index = this.releases.findIndex((e) => e.id === j.row.id)
+              const index = this.releases.findIndex(e => e.id === j.row.id)
               if (index !== -1) {
                 this.releases[index] = j.row
               }
