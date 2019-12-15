@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style src="spectre.css/docs/dist/spectre.min.css"></style>
-<style src="ionicons/dist/css/ionicons.css"></style>
+<style src="ionicons/dist/scss/ionicons.scss" lang="scss"></style>
 <style src="@/assets/css/app.css"></style>
 <style src="@/assets/css/theme-dark.scss" lang="scss"></style>
 
