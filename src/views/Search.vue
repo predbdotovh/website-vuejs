@@ -71,6 +71,7 @@ export default {
   methods: {
     run () {
       this.q = ''
+      this.id = ''
       utils.setPageTitle()
       this.resetPagination()
       this.parseURLQuery(this.$route)
@@ -81,6 +82,7 @@ export default {
     },
     parseURLQuery (route) {
       this.q = route.query.q
+      this.id = route.query.id
       if (route.query.page) {
         this.page.current = route.query.page
       }
@@ -102,8 +104,17 @@ export default {
       }
       window.scrollTo(0, 0)
       const elStart = window.performance.now()
+      const queryParams = {}
+      if (this.id) {
+        queryParams.id = this.id
+      } else if (this.q) {
+        queryParams.q = this.q
+      }
+      if (this.page.current) {
+        queryParams.page = this.page.current
+      }
       api
-        .query({ q: this.q, page: this.page.current })
+        .query(queryParams)
         .then(this.calcPagination)
         .then(data => {
           if (!data) {
