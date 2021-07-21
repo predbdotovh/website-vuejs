@@ -8,16 +8,32 @@
     color: #d6d4d0;
     background-color: #14171d;
   }
-
-  .table td {
-    border-bottom-color: #3e4b59;
+  input[type="text"]::placeholder {
+    color: #b6b4b0;
   }
 
-  .table.table-striped tbody tr:nth-of-type(odd) {
+  .navbar {
+    background-color: #14171d;
+  }
+  .navbar-item {
+    color: #d6d4d0;
+  }
+
+  .table {
+    background-color: #14171d;
+    color: #d6d4d0;
+  }
+  .table.is-striped tbody tr:not(.is-selected):nth-child(even) {
     background-color: #252c33;
   }
 
-  .table.table-hover tbody tr:hover {
-    background-color: #14171d;
+  .table tbody td {
+    border-bottom-color: #3e4b59;
+  }
+  .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover {
+    background-color: #3e4b59;
+  }
+  .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover:nth-child(even) {
+    background-color: #3e4b59;
   }
 }

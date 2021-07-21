@@ -1,20 +1,19 @@
 <template>
   <div class="search">
     <div class="search-form">
-      <form class="input-group">
-        <input
-          ref="input"
-          v-model="q"
-          class="form-input input-query"
-          type="text"
-          placeholder="Search for..."
-        >
-        <button
-          class="btn btn-primary input-group-btn"
-          @click.prevent="go"
-        >
-          <i class="icon ion-14x ion-md-search" />
-        </button>
+      <form class="field has-addons">
+        <div class="control is-expanded">
+          <input
+            ref="input"
+            v-model="q"
+            class="input"
+            type="text"
+            placeholder="Search for..."
+          />
+        </div>
+        <div class="control">
+          <button class="button is-info" @click.prevent="go">Search</button>
+        </div>
       </form>
     </div>
     <div class="status-bar">
@@ -22,15 +21,11 @@
     </div>
     <table
       v-if="releases.length"
-      class="table table-sm table-striped table-hover"
+      class="table is-striped is-hoverable is-fullwidth"
       :class="{ 'state-loading': loading }"
     >
       <tbody>
-        <TableRow
-          v-for="row in releases"
-          :key="row.id"
-          :r="row"
-        />
+        <TableRow v-for="row in releases" :key="row.id" :r="row" />
       </tbody>
     </table>
     <Pagination :page="page" />
@@ -38,116 +33,116 @@
 </template>
 
 <script>
-import api from '@/assets/js/api'
-import utils from '@/assets/js/utils'
-import PaginableMixin from '@/mixins/PaginableMixin.vue'
-import Pagination from '@/components/Pagination.vue'
-import TableRow from '@/components/TableRow.vue'
+import api from "@/assets/js/api";
+import utils from "@/assets/js/utils";
+import PaginableMixin from "@/mixins/PaginableMixin.vue";
+import Pagination from "@/components/Pagination.vue";
+import TableRow from "@/components/TableRow.vue";
 
 export default {
-  name: 'Search',
+  name: "Search",
   components: {
     TableRow,
-    Pagination
+    Pagination,
   },
   mixins: [PaginableMixin],
-  data () {
+  data() {
     return {
       loading: false,
-      status: 'Loading',
-      q: '',
-      releases: []
-    }
+      status: "Loading",
+      q: "",
+      releases: [],
+    };
   },
   watch: {
-    $route: 'handleRouteUpdate'
+    $route: "handleRouteUpdate",
   },
-  created () {
-    this.run()
+  created() {
+    this.run();
   },
-  mounted () {
-    this.$refs.input.focus()
+  mounted() {
+    this.$refs.input.focus();
   },
   methods: {
-    run () {
-      this.q = ''
-      this.id = ''
-      utils.setPageTitle()
-      this.resetPagination()
-      this.parseURLQuery(this.$route)
-      this.search()
+    run() {
+      this.q = "";
+      this.id = "";
+      utils.setPageTitle();
+      this.resetPagination();
+      this.parseURLQuery(this.$route);
+      this.search();
     },
-    go () {
-      this.$router.push({ name: 'search', query: this.generateURLQuery() })
+    go() {
+      this.$router.push({ name: "search", query: this.generateURLQuery() });
     },
-    parseURLQuery (route) {
-      this.q = route.query.q
-      this.id = route.query.id
+    parseURLQuery(route) {
+      this.q = route.query.q;
+      this.id = route.query.id;
       if (route.query.page) {
-        this.page.current = route.query.page
+        this.page.current = route.query.page;
       }
     },
-    generateURLQuery () {
-      const query = {}
+    generateURLQuery() {
+      const query = {};
       if (this.q) {
-        query.q = this.q
+        query.q = this.q;
       }
 
-      return query
+      return query;
     },
-    search () {
-      this.loading = true
-      this.$Progress.start()
-      this.status = 'Loading'
+    search() {
+      this.loading = true;
+      this.$Progress.start();
+      this.status = "Loading";
       if (this.q) {
-        utils.setPageTitle('Search ' + this.q)
+        utils.setPageTitle("Search " + this.q);
       }
-      window.scrollTo(0, 0)
-      const elStart = window.performance.now()
-      const queryParams = {}
+      window.scrollTo(0, 0);
+      const elStart = window.performance.now();
+      const queryParams = {};
       if (this.id) {
-        queryParams.id = this.id
+        queryParams.id = this.id;
       } else if (this.q) {
-        queryParams.q = this.q
+        queryParams.q = this.q;
       }
       if (this.page.current) {
-        queryParams.page = this.page.current
+        queryParams.page = this.page.current;
       }
       api
         .query(queryParams)
         .then(this.calcPagination)
-        .then(data => {
+        .then((data) => {
           if (!data) {
-            return
+            return;
           }
 
           const elSeconds =
-            Math.round(window.performance.now() - elStart) / 1000
+            Math.round(window.performance.now() - elStart) / 1000;
           this.status =
-            'Results ' +
+            "Results " +
             (data.offset + 1) +
-            '-' +
+            "-" +
             (data.offset + data.rowCount) +
-            ' of ' +
+            " of " +
             data.total +
-            ' matches in ' +
+            " matches in " +
             elSeconds +
-            ' seconds'
-          this.releases = data.rows
+            " seconds";
+          this.releases = data.rows;
         })
-        .catch(err => {
-          this.status = err.message || 'Error while loading releases'
+        .catch((err) => {
+          this.status = err.message || "Error while loading releases";
         })
         .finally(() => {
-          this.loading = false
-          this.$Progress.finish()
-        })
+          this.loading = false;
+          this.$Progress.finish();
+        });
     },
-    handleRouteUpdate () {
-      this.run()
-    }
-  }
-}
+    handleRouteUpdate() {
+      this.run();
+    },
+  },
+};
 </script>
 
 <style lang="scss">

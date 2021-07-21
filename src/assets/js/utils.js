@@ -1,13 +1,13 @@
-const appName = 'PREdb'
+const appName = "PREdb";
 
 const utils = {
-  setPageTitle (title) {
+  setPageTitle(title) {
     if (title) {
-      document.title = title + ' - ' + appName
+      document.title = title + " - " + appName;
     } else {
-      document.title = appName
+      document.title = appName;
     }
-  }
-}
+  },
+};
 
-export default utils
+export default utils;

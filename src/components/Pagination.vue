@@ -1,46 +1,39 @@
 <template>
-  <ul class="pagination">
-    <li
-      v-if="page.prev"
-      class="page-item"
+  <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    <router-link
+      v-if="page.current > 1"
+      class="pagination-previous"
+      :to="page.prev"
     >
-      <router-link
-        :to="page.prev"
-        :disabled="page.current <= 1"
-      >
-        <i class="icon ion-ios-arrow-back" />
-      </router-link>
-    </li>
-    <li
-      v-for="p in page.list"
-      :key="p.i"
-      class="page-item"
-      :class="{ active: page.current === p.i }"
+      Prev
+    </router-link>
+    <span v-else class="pagination-previous" disabled>Prev</span>
+    <router-link
+      v-if="page.current < page.max"
+      class="pagination-next"
+      :to="page.next || ''"
     >
-      <router-link
-        :to="p.link"
-        :disabled="p.i < 1 || p.i > page.max"
-      >
-        {{ p.text }}
-      </router-link>
-    </li>
-    <li
-      v-if="page.next"
-      class="page-item"
-    >
-      <router-link
-        :to="page.next"
-        :disabled="page.current >= page.max"
-      >
-        <i class="icon ion-ios-arrow-forward" />
-      </router-link>
-    </li>
-  </ul>
+      Next
+    </router-link>
+    <span v-else class="pagination-next" disabled>Next</span>
+    <ul class="pagination-list">
+      <li v-for="p in page.list" :key="p.i">
+        <router-link
+          class="pagination-link"
+          :to="p.link"
+          :disabled="p.i < 1 || p.i > page.max"
+          :class="{ 'is-current': page.current === p.i }"
+        >
+          {{ p.text }}
+        </router-link>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
 export default {
-  name: 'Pagination',
+  name: "Pagination",
   props: {
     page: {
       type: Object,
@@ -49,16 +42,10 @@ export default {
           prev: false,
           current: 0,
           list: [],
-          next: false
-        }
-      }
-    }
-  }
-}
+          next: false,
+        };
+      },
+    },
+  },
+};
 </script>
-
-<style lang="scss">
-.pagination {
-  justify-content: center;
-}
-</style>

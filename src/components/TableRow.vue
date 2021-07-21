@@ -6,17 +6,13 @@
           {{ r.cat }}
         </router-link>
       </div>
-      <div
-        v-if="r.genre"
-        class="genre"
-        :title="r.genre"
-      >
+      <div v-if="r.genre" class="genre" :title="r.genre">
         {{ r.genre.substring(0, 36) }}
       </div>
     </td>
     <td>
       <div class="name">
-        {{ r.name.replace('-' + r.team, '')
+        {{ r.name.replace("-" + r.team, "")
         }}<router-link
           class="text-italic"
           :to="{ name: 'search', query: { q: '@team ' + r.team } }"
@@ -28,38 +24,23 @@
         class="nuke"
         :class="{
           'nuke-nuked': nukeNuke.includes(r.nuke.type),
-          'nuke-fine': nukeFine.includes(r.nuke.type)
+          'nuke-fine': nukeFine.includes(r.nuke.type),
         }"
       >
         {{ r.nuke.reason }} - <span class="nuke-net">{{ r.nuke.net }}</span>
       </div>
     </td>
     <td>
-      <div
-        v-if="r.preAt"
-        class="date"
-      >
+      <div v-if="r.preAt" class="date">
         {{ preAt.toLocaleDateString() }}
         {{ preAt.toLocaleTimeString() }}
       </div>
-      <div
-        v-if="r.files"
-        class="files"
-      >
-        {{ r.files }}<span
-          class="files-symbol"
-          title="Files"
-        >F</span>
+      <div v-if="r.files" class="files">
+        {{ r.files }}<span class="files-symbol" title="Files">F</span>
       </div>
-      <div
-        v-if="r.size"
-        class="size"
-      >
+      <div v-if="r.size" class="size">
         {{ Math.round(r.size * 100) / 100
-        }}<span
-          class="size-symbol"
-          title="Size"
-        >MB</span>
+        }}<span class="size-symbol" title="Size">MB</span>
       </div>
     </td>
   </tr>
@@ -67,27 +48,27 @@
 
 <script>
 export default {
-  name: 'TableRow',
+  name: "TableRow",
   props: {
     r: {
       type: Object,
       default: () => {
-        return {}
-      }
-    }
+        return {};
+      },
+    },
   },
-  data () {
+  data() {
     return {
-      nukeFine: ['unnuke', 'undelpre'],
-      nukeNuke: ['nuke', 'modnuke', 'delpre']
-    }
+      nukeFine: ["unnuke", "undelpre"],
+      nukeNuke: ["nuke", "modnuke", "delpre"],
+    };
   },
   computed: {
-    preAt () {
-      return new Date(this.r.preAt * 1000)
-    }
-  }
-}
+    preAt() {
+      return new Date(this.r.preAt * 1000);
+    },
+  },
+};
 </script>
 
 <style lang="scss">
