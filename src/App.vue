@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="$store.getters.appTheme">
     <Navbar />
-    <div>
+    <div class="main">
       <router-view />
     </div>
     <vue-progress-bar />
