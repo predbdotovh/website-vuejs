@@ -36,4 +36,11 @@
   .table.is-hoverable.is-striped tbody tr:not(.is-selected):hover:nth-child(even) {
     background-color: #3e4b59;
   }
+
+  .pagination-link,.pagination-prev,.pagination-next {
+    color: #d6d4d0;
+  }
+  .pagination-link:hover,.pagination-prev:hover,.pagination-next:hover {
+    color: #dbdbdb;
+  }
 }
