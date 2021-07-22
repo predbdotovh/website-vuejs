@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading" class="loading-wrapper">
+  <div v-if="loading" class="stats loading-wrapper">
     <div class="loading" />
     Loading stats
   </div>
@@ -11,6 +11,10 @@
     <div class="stats-upddate">
       Last update : {{ new Date(stats.date).toLocaleString() }}
     </div>
+
+    <p>
+      <a href="/download">Monthly SQL dumps</a>
+    </p>
   </div>
 </template>
 
