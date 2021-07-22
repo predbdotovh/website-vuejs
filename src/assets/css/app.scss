@@ -1,5 +1,13 @@
 // /* Styles shared with most views */
 
+html, body {
+  height: 100%;
+}
+
+#app {
+  min-height: 100%;
+}
+
 .state-loading {
   opacity: 0.6;
 }
