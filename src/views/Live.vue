@@ -1,9 +1,6 @@
 <template>
   <div class="live">
     <div class="status-bar">
-      <span class="live-state" :class="{ online: running, offline: !running }">
-        <div class="icon ion-md-wifi" :class="{ pulse: running }" />
-      </span>
       {{ status }}
     </div>
     <table
