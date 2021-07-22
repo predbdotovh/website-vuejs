@@ -16,7 +16,7 @@
         }}<router-link
           class="text-italic"
           :to="{ name: 'search', query: { q: '@team ' + r.team } }"
-          >-<!-- eslint-disable-line -->{{ r.team }}
+          >-{{ r.team }}
         </router-link>
       </div>
       <div
