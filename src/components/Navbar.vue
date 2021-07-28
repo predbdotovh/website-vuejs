@@ -45,6 +45,9 @@
           RSS
         </a>
 
+        <router-link class="navbar-item" :to="{ name: 'teams' }">
+          Teams
+        </router-link>
         <router-link class="navbar-item" :to="{ name: 'live' }">
           Realtime
         </router-link>

@@ -59,6 +59,11 @@ const api = {
       return json.data;
     });
   },
+  teams() {
+    return this.get("teams", {}).then((json) => {
+      return json.data;
+    });
+  },
 };
 
 export default api;

@@ -14,12 +14,22 @@
 
   .navbar {
     background-color: #14171d;
+
+    .checkbox:hover {
+      color: #fafafa;
+    }
   }
   .navbar-item {
     color: #d6d4d0;
   }
-
-  .table {
+  .navbar-item.is-active {
+    color: white;
+  }
+  .navbar-item.is-active:hover {
+    color: #485fc7;
+  }
+ 
+  .table, .table th {
     background-color: #14171d;
     color: #d6d4d0;
   }

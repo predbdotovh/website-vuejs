@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Search from "./views/Search.vue";
 // import Live from "@/views/Live.vue";
 // import Stats from '@/views/Stats.vue';
+// import Teams from "@/views/Teams.vue";
 
 Vue.use(Router);
 
@@ -27,6 +28,12 @@ export default new Router({
       name: "stats",
       component: () =>
         import(/* webpackChunkName: "stats" */ "./views/Stats.vue"),
+    },
+    {
+      path: "/teams",
+      name: "teams",
+      component: () =>
+        import(/* webpackChunkName: "teams" */ "./views/Teams.vue"),
     },
   ],
 });
