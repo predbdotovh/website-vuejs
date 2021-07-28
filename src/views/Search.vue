@@ -25,7 +25,7 @@
       :class="{ 'state-loading': loading }"
     >
       <tbody>
-        <TableRow v-for="row in releases" :key="row.id" :r="row" />
+        <PreTableRow v-for="row in releases" :key="row.id" :r="row" />
       </tbody>
     </table>
     <Pagination :page="page" />
@@ -37,12 +37,12 @@ import api from "@/assets/js/api";
 import utils from "@/assets/js/utils";
 import PaginableMixin from "@/mixins/PaginableMixin.vue";
 import Pagination from "@/components/Pagination.vue";
-import TableRow from "@/components/TableRow.vue";
+import PreTableRow from "@/components/PreTableRow.vue";
 
 export default {
   name: "Search",
   components: {
-    TableRow,
+    PreTableRow,
     Pagination,
   },
   mixins: [PaginableMixin],

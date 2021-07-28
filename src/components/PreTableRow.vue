@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr class="pre-table-row">
     <td>
       <div class="cat">
         <router-link :to="{ name: 'search', query: { q: '@cat ' + r.cat } }">
@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: "TableRow",
+  name: "PreTableRow",
   props: {
     r: {
       type: Object,

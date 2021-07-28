@@ -9,7 +9,7 @@
       :class="{ 'state-loading': loading }"
     >
       <tbody>
-        <TableRow v-for="row in releases" :key="row.id" :r="row" />
+        <PreTableRow v-for="row in releases" :key="row.id" :r="row" />
       </tbody>
     </table>
   </div>
@@ -18,12 +18,12 @@
 <script>
 import api from "@/assets/js/api";
 import utils from "@/assets/js/utils";
-import TableRow from "@/components/TableRow.vue";
+import PreTableRow from "@/components/PreTableRow.vue";
 
 export default {
   name: "Live",
   components: {
-    TableRow,
+    PreTableRow,
   },
   data() {
     return {
