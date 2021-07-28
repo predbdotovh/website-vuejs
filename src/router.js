@@ -1,14 +1,15 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Search from "./views/Search.vue";
-import Live from "@/views/Live.vue";
-// import Stats from '@/views/Stats.vue'
+// import Live from "@/views/Live.vue";
+// import Stats from '@/views/Stats.vue';
 
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
+  linkActiveClass: "is-active",
   routes: [
     {
       path: "/",
@@ -18,7 +19,8 @@ export default new Router({
     {
       path: "/live",
       name: "live",
-      component: Live,
+      component: () =>
+        import(/* webpackChunkName: "live" */ "./views/Live.vue"),
     },
     {
       path: "/stats",
