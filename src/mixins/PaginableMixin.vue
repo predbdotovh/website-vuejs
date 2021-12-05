@@ -27,7 +27,7 @@ export default {
 
       this.page = {
         current: Math.floor(data.offset / data.reqCount) + 1,
-        max: Math.ceil(data.total / data.reqCount),
+        max: Math.min(Math.ceil(data.total / data.reqCount), 50),
         list: [],
       };
 
