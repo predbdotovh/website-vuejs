@@ -65,7 +65,7 @@
           href="https://github.com/predbdotovh"
           target="_blank"
         >
-          Github
+          GitHub
         </a>
       </div>
     </div>
